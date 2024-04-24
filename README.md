@@ -1,6 +1,6 @@
 # Cours
 
-Répertoire de supports de cours écrits au format Marp.
+_Répertoire de supports de cours au format Marp_
 
 ## Usage
 
@@ -12,7 +12,7 @@ npx @marp-team/marp-cli deck.md -o deck.pdf --allow-local-files
 
 ## Index
 
-_Note : les supports de cours peuvent inclure en commentaire des remarques complémentaires ou des suggestions d'exercices._
+Note : les supports de cours peuvent inclure en commentaire des remarques complémentaires ou des suggestions d'exercices.
 
 - [TypeScript](./typescript/deck.md)
 - [Tests automatisés](./tests-automatises/deck.md)
