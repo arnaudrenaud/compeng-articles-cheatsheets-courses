@@ -16,7 +16,7 @@ Arnaud Renaud
 
 ---
 
-# TypeScript plutôt que JavaScript : quel intérêt ?
+## TypeScript plutôt que JavaScript : quel intérêt ?
 
 ---
 
@@ -30,11 +30,11 @@ _Pratique avec l'appel d'une fonction non typée_
 
 ---
 
-# Apports de TypeScript
+## Apports de TypeScript
 
 ---
 
-## ✍️ TypeScript : sur-ensemble de JavaScript
+### ✍️ TypeScript : sur-ensemble de JavaScript
 
 Reprend le langage JavaScript et ajoute des annotations de type aux :
 
@@ -45,7 +45,7 @@ Reprend le langage JavaScript et ajoute des annotations de type aux :
 
 ---
 
-## ❌ TypeScript : règles de validation
+### ❌ TypeScript : règles de validation
 
 Émet des erreurs lorsque le typage est incomplet ou incohérent
 
@@ -53,7 +53,7 @@ _(Ces erreurs sont affichées en temps réel dans l'éditeur de texte)_
 
 ---
 
-## ✅ TypeScript : compilateur
+### ✅ TypeScript : compilateur
 
 Permet la compilation en code JavaScript une fois que les erreurs ont été corrigées
 
@@ -61,7 +61,7 @@ _(On résout les erreurs à la compilation – build time – au lieu d'attendre
 
 ---
 
-## 📜 TypeScript : documentation et autocomplétion automatiques
+### 📜 TypeScript : documentation et autocomplétion automatiques
 
 Les annotations de type :
 
@@ -70,7 +70,7 @@ Les annotations de type :
 
 ---
 
-## Apports de TypeScript :
+### Apports de TypeScript :
 
 - ✍️ Sur-ensemble de JavaScript
 - ❌ Règles de validation
@@ -79,11 +79,11 @@ Les annotations de type :
 
 ---
 
-# Mise en pratique : projet Node.js
+## Mise en pratique : projet Node.js
 
 ---
 
-## Mise en place d'un projet Node.js (JavaScript)
+### Mise en place d'un projet Node.js (JavaScript)
 
 - Se placer dans un nouveau dossier : `mkdir ts-practice && cd ts-practice`
 - Initialiser un projet Node.js : `npm init -y`
@@ -92,7 +92,7 @@ Les annotations de type :
 
 ---
 
-## Configuration de TypeScript
+### Configuration de TypeScript
 
 - Ajouter TypeScript au projet : `npm install --save-dev typescript`
 - Générer une configuration TypeScript : `npx tsc --init`
@@ -102,7 +102,7 @@ Les annotations de type :
 
 ---
 
-## Compilation avec TypeScript
+### Compilation avec TypeScript
 
 - Renommer `index.js` en `index.ts`
 - Déplacer `index.ts` dans le répertoire `src`
@@ -111,7 +111,7 @@ Les annotations de type :
 
 ---
 
-## Définition des scripts de compilation et d'exécution
+### Définition des scripts de compilation et d'exécution
 
 - Dans `package.json`, ajouter deux lignes à l'objet `scripts` :
   - `"build": "tsc"`
@@ -122,11 +122,11 @@ Les annotations de type :
 
 ---
 
-# Notions pratiques
+## Notions pratiques
 
 ---
 
-## Typage d'une fonction
+### Typage d'une fonction
 
 ```ts
 function getTemperatureForCity(city: string): number | undefined {
@@ -141,14 +141,14 @@ On annote la signature d'une fonction :
 
 ---
 
-## Types primitifs
+### Types primitifs
 
 Valeurs définies : `boolean`, `number`, `bigint`, `string`
 Valeurs indéfinies : `undefined`, `null`, `NaN`, `void`
 
 ---
 
-## Types spéciaux
+### Types spéciaux
 
 Valeurs inconnues : `unknown`, `any`
 Promesse : `Promise` (par exemple : `Promise<string>`)
@@ -163,7 +163,7 @@ Objets : par exemple : `{name: string; height: number}`
 
 ---
 
-## Restriction du type avec l'émission d'une erreur
+### Restriction du type avec l'émission d'une erreur
 
 ```ts
 function getTemperatureForCity(city: string): number {
@@ -180,7 +180,7 @@ _Sans TypeScript, on n'aurait peut être pas pensé à gérer ce cas._
 
 ---
 
-## Définition d'un type composé (objet)
+### Définition d'un type composé (objet)
 
 ```ts
 function getWeatherForCity(city: string): {
@@ -195,7 +195,7 @@ function getWeatherForCity(city: string): {
 
 ---
 
-## Définition d'un alias pour un type
+### Définition d'un alias pour un type
 
 ```ts
 type Weather = {
@@ -210,7 +210,7 @@ Cet alias permet de factoriser la définition du type composé (on peut aussi ut
 
 ---
 
-## Typage d'une constante
+### Typage d'une constante
 
 ```ts
 const WEATHER_FOR_CITIES: Weather[] = […]
@@ -220,7 +220,7 @@ Le typage explicite d'une variable ou d'une constante est souvent superflu mais 
 
 ---
 
-## Typage d'une fonction sans valeur de retour
+### Typage d'une fonction sans valeur de retour
 
 ```ts
 function printWeatherForCity(city: string): void {
@@ -233,7 +233,7 @@ Le type `void` est réservé aux fonctions qui ne retournent aucune valeur.
 
 ---
 
-## Énumérations avec type littéral
+### Énumérations avec type littéral
 
 ```ts
 function printWeatherForCity(
@@ -248,7 +248,7 @@ Le littéral `"CELSIUS" | "FAHRENHEIT"` est plus précis que `string` et empêch
 
 ---
 
-## Énumération avec _enum_
+### Énumération avec _enum_
 
 ```ts
 enum TemperatureUnit {
@@ -266,7 +266,7 @@ function printWeatherForCity(
 
 ---
 
-## Typage d'une classe
+### Typage d'une classe
 
 ```ts
 class Weather implements WeatherAttributes {
@@ -288,7 +288,7 @@ Ses méthodes peuvent être typées comme des fonctions.
 
 ---
 
-## Import-export des types
+### Import-export des types
 
 ```ts
 export type WeatherAttributes = {
@@ -303,7 +303,7 @@ Les types peuvent être exportés et importés comme n'importe quel autre symbol
 
 ---
 
-## Type de retour d'une fonction asynchrone
+### Type de retour d'une fonction asynchrone
 
 ```ts
 async setCurrent(): Promise<void> {
@@ -315,7 +315,7 @@ Lorsqu'une fonction contient du code asynchrone (`async`-`await`), sa valeur de 
 
 ---
 
-## Conversion de type (_type cast_)
+### Conversion de type (_type cast_)
 
 ```ts
 const weather = (await weatherResponse.json()) as {

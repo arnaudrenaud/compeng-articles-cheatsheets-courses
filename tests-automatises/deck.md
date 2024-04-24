@@ -31,15 +31,15 @@ const articlesExample = [
 
 <!-- Ajouter une règle : si des articles ont des frais de port spécifiques (`specialShippingCost`), ne pas les compter dans le poids total mais ajouter leurs frais de port spécifiques aux frais de port par poids -->
 
-# Pourquoi automatiser les tests ?
+## Pourquoi automatiser les tests ?
 
-**Une application devient rapidement trop complexe pour jongler mentalement entre tous ses cas d'usage.**
+Une application devient rapidement trop complexe pour jongler mentalement entre tous ses cas d'usage.
 
 ---
 
 <!-- Exercice : initialisation d'un projet NPM, installation de Jest, écriture des spécifications -->
 
-# Batterie de tests automatisés
+## Batterie de tests automatisés
 
 Système de gestion de la complexité :
 
@@ -54,7 +54,7 @@ Système de gestion de la complexité :
 
 ---
 
-# Quels cas tester ? Où s'arrêter ?
+## Quels cas tester ? Où s'arrêter ?
 
 Un tableau vide ? _null_ ? _undefined_ ?
 
@@ -67,7 +67,7 @@ Un tableau vide ? _null_ ? _undefined_ ?
 
 <!-- Exercice : implémenter une fonction `getOrderCost` qui une commande en paramètre et retourne non seulement les frais de port, mais aussi le prix total sans et avec les frais de port. Quels cas tester ? -->
 
-# Périmètres de test
+## Périmètres de test
 
 - Tests unitaires
 - Tests d'intégration
@@ -75,7 +75,7 @@ Un tableau vide ? _null_ ? _undefined_ ?
 
 ---
 
-## Tests unitaires
+### Tests unitaires
 
 Contrôle du comportement d'un composant isolé (fonction ou méthode) dans différents cas d'usage.
 
@@ -85,7 +85,7 @@ _Exemple : tester un algorithme de calcul._
 
 ---
 
-## Tests d'intégration
+### Tests d'intégration
 
 Contrôle du comportement d'une chaîne de composants.
 
@@ -95,7 +95,7 @@ _Exemple : vérifier qu'une méthode produit la bonne écriture en base de donn�
 
 ---
 
-## Tests de bout en bout
+### Tests de bout en bout
 
 Contrôle du comportement de la chaîne complète des composants d'une fonctionnalité de l'application.
 
@@ -105,41 +105,41 @@ _Exemple : en soumettant un formulaire web, vérifier que le bon message de succ
 
 ---
 
-## Tests unitaires
+### Tests unitaires
 
 ![](images/unit.png)
 
 ---
 
-## Tests d'intégration
+### Tests d'intégration
 
 ![](images/integration.png)
 
 ---
 
-## Tests de bout en bout
+### Tests de bout en bout
 
 ![](images/end-to-end.png)
 
 ---
 
-## Tests d'intégration et de bout en bout : jusqu'où aller ?
+### Tests d'intégration et de bout en bout : jusqu'où aller ?
 
 ⚠️ Ne pas tester tous les cas : c'est la prérogative des tests unitaires, qui sont les plus précis.
 
 ---
 
-## Pyramide des tests
+### Pyramide des tests
 
 ![](images/pyramid.png)
 
 ---
 
-# Fonctions pures et impures, environnement réel ou simulé
+## Fonctions pures et impures, environnement réel ou simulé
 
 ---
 
-## Fonction pure
+### Fonction pure
 
 Une fonction pure n'a pas d'effet de bord : elle ne change aucun état, se contente de retourner un résultat qui dépend de ses paramètres d'entrée.
 
@@ -155,7 +155,7 @@ Tester une fonction pure revient à contrôler sa valeur de retour.
 
 <!-- Exercice : implémenter et tester la méthode d'instance confirm qui doit passer isConfirmed à true (fonction impure qui modifie son environnement) -->
 
-## Fonction impure
+### Fonction impure
 
 Une fonction impure a des effets de bord : elle modifie l'état environnant.
 
@@ -171,7 +171,7 @@ Pour tester une fonction impure, il faut contrôler l'état des objets appelés 
 
 ---
 
-## Environnement réel ou simulé ?
+### Environnement réel ou simulé ?
 
 Si l'on contrôle l'environnement, on peut l'utiliser réellement pour le mettre dans différents cas.
 
@@ -187,11 +187,11 @@ _Exemple : une API externe (simuler sa réponse en succès ou en erreur)._
 
 ---
 
-# Pratiques de test
+## Pratiques de test
 
 ---
 
-## Test-driven development (TDD)
+### Test-driven development (TDD)
 
 Écrire d'abord les tests, puis les laisser nous guider dans l'implémentation.
 
@@ -202,7 +202,7 @@ _Exemple : une API externe (simuler sa réponse en succès ou en erreur)._
 
 ---
 
-## Couverture de tests
+### Couverture de tests
 
 Statistiques donnant une vue d'ensemble sur la proportion de nos fonctions et méthodes testées, et si tous leurs chemins sont parcourus par les tests.
 
