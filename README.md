@@ -14,5 +14,5 @@ npx @marp-team/marp-cli deck.md -o deck.pdf --allow-local-files
 
 _Note : les supports de cours peuvent inclure en commentaire des remarques complémentaires ou des suggestions d'exercices._
 
-- [TypeScript]()
+- [TypeScript](./typescript/deck.md)
 - [Tests automatisés](./tests-automatises/deck.md)
