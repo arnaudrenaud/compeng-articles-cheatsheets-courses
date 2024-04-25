@@ -1,8 +1,6 @@
-# What to do with Runtime Errors
+# What to do with runtime errors
 
-Errors are painful for the programmer and the user alike. Errors without a proper message even more. Errors that crash the entire program, way more.
-
-This article will not cover compilation errors (they are build-time errors, not run-time). Once compilation errors are fixed and the program is compiled and running, runtime errors can start to emerge.
+Errors are painful for the programmer and the user alike. Errors without a proper message even more. Errors that crash your whole server, all the way more.
 
 ## Theoretical vocabulary: errors and exceptions
 
@@ -15,23 +13,27 @@ Errors can be either:
 
 ### Exceptions (checked errors)
 
-An error is considered an exception when it does not imply a fatal malfunction in the program.
-Typically, when a third party fails to conform to the program – for example when:
+An error is considered an exception when it does not imply a malfunction in the program. It should be caught (checked) and recovered from.
+It typically occurs when a third party behaves abnormally.
+
+Examples:
 
 - a user requests a non-existent resource
 - a user submits a form with malformed data
-- an external HTTP API does not respond
+- an external API does not respond
 
 ### Unchecked errors
 
-Reciprocally, an error is considered unchecked when it reveals a malfunction in the program: a bug or a misconfiguration – for example:
+Reciprocally, an unchecked error implies a malfunction in the program. It should be left uncaught (unchecked) and not recovered from – instead, it should be fixed. It typically comes from a logical misconception or some misconfiguration.
 
-- an algorithm crashes with valid arguments
+Examples:
+
+- an algorithm crashes unexpectedly
 - you try to connect to a database with invalid credentials
 
-## In practice
+## Practical vocabulary: in JavaScript
 
-Some programming languages provide a distinction between plain errors and exceptions.
+Some programming languages provide a distinction between plain errors and exceptions, such as Java that treats both `Error` and `Exception` as `throwable` objects.
 
 <!-- TODO: review below -->
 
