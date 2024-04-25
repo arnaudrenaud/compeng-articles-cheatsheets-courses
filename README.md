@@ -1,18 +1,12 @@
-# Cours
+# Computer engineering courses and cheatsheets
 
-_Répertoire de supports de cours au format Marp_
+## Courses
 
-## Usage
+### Slide decks
 
-Pour rendre un fichier Marp en PDF :
+Courses slide decks are Marp Markdown files that can be [rendered as HTML or as PDF](https://github.com/marp-team/marp-cli?tab=readme-ov-file#try-it-now).
 
-```
-npx @marp-team/marp-cli deck.md -o deck.pdf --allow-local-files
-```
+Files may include comments with additional remarks and exercises (display as raw text to see comments).
 
-## Index
-
-Note : les supports de cours peuvent inclure en commentaire des remarques complémentaires ou des suggestions d'exercices.
-
-- [TypeScript](./typescript/deck.md)
-- [Tests automatisés](./tests-automatises/deck.md)
+- [TypeScript](./typescript/deck.md) (French)
+- [Tests automatisés](./tests-automatises/deck.md) (French)
