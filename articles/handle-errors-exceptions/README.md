@@ -6,12 +6,13 @@ Errors are painful for the programmer and the user alike. Errors without a prope
 
 This is a practical guide to help you with runtime errors in four ways:
 
-- Distinguish exceptions from uncaught errors…
-- …even if errors are almost always caught in the end
+- Distinguish exceptions from errors
 - Give yourself full information about the error
 - Give the user limited but useful information about the error
 
-## Distinguish exceptions from errors…
+We’ll use the example of a web server, but the same principles apply to any other type of service and to most client-side applications.
+
+## Error or exception?
 
 A runtime error happens when an instruction fails to complete.
 
@@ -41,43 +42,48 @@ Examples:
 - a user submits malformed data
 - an external provider does not respond
 
-## …even if errors are almost always caught in the end
+## What to do with the different cases
 
-Even if an error is unrecoverable and should terminate the program, most of the time one does not want to crash the entire app or server when one error occurs.
+### User-induced error
 
-For example, if you're running a web server that depends on a database:
-
-- if you can't connect to the database, do not try to catch the error, as it is unrecoverable
-
-## Assumptions
-
-We’ll use the example of a web server, but the same principles apply to any other type of service, and also to most client-side applications.
-
-In the JavaScript vocabulary, there are no “exceptions”. There are only “errors”. It is up to the developers to know whether those should be treated as exceptions or as actual errors.
-
-The golden rule: never crash
-
-First, the service should never crash. It should handle the error and keep the service up for subsequent requests. Fortunately, web servers often provide this feature by default. (careful with Express 4 and async errors).
-
-Some errors are bugs, some are not
-
-A user-induced error (for example, a malformed request):
+In case of a user-induced error (for example, a malformed request):
 
 - Is it an error or an exception? An exception.
 - Should I tell the user all about it? Absolutely, so they can fix it.
 - Should I output it in my logs? You may, marking it as a user-induced exception. This way, you could learn about app usage and improve user experience.
 
-A third-party-induced error (for example, an external remote API used by your product):
+### Third-party-induced error
+
+In case of a third-party-induced error (for example, an external remote API used by your product):
 
 - Is it an error or an exception? An exception.
 - Should I tell the user all about it? Yes, so that they know it’s not a bug on your side: you can’t do much, and they just have to wait.
-- Should I output it in my logs? Yes, marking it as a third-party-induced exception.
+- Should I output it in my logs? Yes, marking it as a third-party-induced exception. This way, you could learn about potential deficiencies among your third-party provider and possibly switch to another one.
 
-An internal error (AKA a bug, which is an error you didn’t predict):
+### Internal error
+
+#### Outside a user request
+
+In case of an error occuring outside a user request (for example a database migration failing at server startup):
 
 - Is it an error or an exception? An error.
-- Should I tell the user all about it? No, just show them a simple message (such as ‘Internal server error’) so that they know something has to be fixed on your side.
-- Should I output it in my logs? Yes, marking it as an internal error: it’s a bug that needs to be addressed.
+- Should I output it in my logs? Yes, it’s a bug that needs to be addressed.
+
+You have nothing to do in this case: do not catch the error. By default, it will crash the server and output the error to the logs.
+
+#### Within a user request
+
+In case of an error occuring inside a user request:
+
+- Is it an error or an exception? An error.
+- Should I tell the user all about it? No, just show them a simple message (such as "Internal server error") so that they know something has to be fixed on your side.
+- Should I output it in my logs? Yes, it’s a bug that needs to be addressed.
+
+You have nothing to do in this case: do not catch the error. Any error uncaught by the developer will be caught by the server and result in a default client-side error message and output the full error in the logs.
+
+_Note: this is not true for Express 4 where async errors are not handled by default and make the server crash_.
+
+## Summary
 
 Using these rules, both you and the user are properly informed at the correct level:
 
@@ -85,10 +91,16 @@ Using these rules, both you and the user are properly informed at the correct le
   - their request is incorrect
   - or if they just need to wait for a service to resume
   - or they have to get in touch with you for a bugfix
-- You know whether errors need urgent work (a bug fix) or if they are independent of your work
+- You know whether errors need a bug fix or if they are exceptions independent of your work
+
+Finally, you have seen it is no use to surround everything with `try-catch` blocks: you should only catch specific exceptions and let your server treat the rest as errors.
 
 ## In practice in JavaScript
 
 Some programming languages provide a distinction between plain errors and exceptions, such as Java that treats both `Error` and `Exception` as subclasses of `Throwable`.
 
 On the other hand, in JavaScript you can only `throw new Error(…)`. There is no specific class for `Exceptions`, which is not
+
+In the JavaScript vocabulary, there are no built-in exceptions. There are only errors from the `Error` class.
+
+It is up to you to throw and catch these as exceptions or as actual errors.
