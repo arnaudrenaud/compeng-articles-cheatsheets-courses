@@ -1,50 +1,53 @@
 # What to do with runtime errors
 
-Errors are painful for the programmer and the user alike. Errors without a proper message even more. Errors that crash your whole server, all the way more.
+Errors are painful for the programmer and the user alike. Errors without a proper message even more. And what about silent errors that make debugging harder?
 
-## Theoretical vocabulary: errors and exceptions
+## Goals
+
+This is a practical guide to help you with runtime errors in four ways:
+
+- Distinguish exceptions from uncaught errors…
+- …even if errors are almost always caught in the end
+- Give yourself full information about the error
+- Give the user limited but useful information about the error
+
+## Distinguish exceptions from errors…
 
 A runtime error happens when an instruction fails to complete.
 
-Errors can be either:
+You can either:
 
-- checked (also called _exceptions_)
-- or unchecked (plain errors)
+- let errors terminate the program – in this case, errors are left _unckecked_
+- or catch them before they do – in this case, errors are _checked_ and are called exceptions
 
-### Exceptions (checked errors)
+### Unchecked error
 
-An error is considered an exception when it does not imply a malfunction in the program. It should be caught (checked) and recovered from.
-It typically occurs when a third party behaves abnormally.
-
-Examples:
-
-- a user requests a non-existent resource
-- a user submits a form with malformed data
-- an external API does not respond
-
-### Unchecked errors
-
-Reciprocally, an unchecked error implies a malfunction in the program. It should be left uncaught (unchecked) and not recovered from – instead, it should be fixed. It typically comes from a logical misconception or some misconfiguration.
+Errors may imply a bug: a logical misconception or some misconfiguration. In that case, they should _not_ be caught and silenced but rather fixed.
 
 Examples:
 
 - an algorithm crashes unexpectedly
 - you try to connect to a database with invalid credentials
 
-## Practical vocabulary: in JavaScript
+### Exceptions
 
-Some programming languages provide a distinction between plain errors and exceptions, such as Java that treats both `Error` and `Exception` as `throwable` objects.
+Reciprocally, an error may not imply a malfunction in the program. It is typically the case when a third party behaves abnormally.
 
-<!-- TODO: review below -->
+Hence the name, _exception_: exceptionally, it should be caught and worked around because there is no fix in our program.
 
-## Goals
+Examples:
 
-This is a general-use manual to help you with runtime errors in four ways:
+- a user requests a non-existent resource
+- a user submits malformed data
+- an external provider does not respond
 
-- avoid a service crash when an error occurs
-- distinguish plain errors and exceptions
-- give yourself full information about the error
-- give the user limited but useful information about the error
+## …even if errors are almost always caught in the end
+
+Even if an error is unrecoverable and should terminate the program, most of the time one does not want to crash the entire app or server when one error occurs.
+
+For example, if you're running a web server that depends on a database:
+
+- if you can't connect to the database, do not try to catch the error, as it is unrecoverable
 
 ## Assumptions
 
@@ -83,3 +86,9 @@ Using these rules, both you and the user are properly informed at the correct le
   - or if they just need to wait for a service to resume
   - or they have to get in touch with you for a bugfix
 - You know whether errors need urgent work (a bug fix) or if they are independent of your work
+
+## In practice in JavaScript
+
+Some programming languages provide a distinction between plain errors and exceptions, such as Java that treats both `Error` and `Exception` as subclasses of `Throwable`.
+
+On the other hand, in JavaScript you can only `throw new Error(…)`. There is no specific class for `Exceptions`, which is not
