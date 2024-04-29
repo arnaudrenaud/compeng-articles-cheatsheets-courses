@@ -30,9 +30,9 @@ Examples:
 - an algorithm crashes unexpectedly
 - you try to connect to a database with invalid credentials
 
-### Exceptions
+### Exceptions (checked error)
 
-Reciprocally, an error may not imply a malfunction in the program. It is typically the case when abnormaml behavior comes from a third party.
+Reciprocally, an error may not imply a malfunction in the program. It is typically the case when abnormal behavior comes from a third party.
 
 Hence the name, _exception_: exceptionally, it should be caught and worked around because there is nothing to fix in our program.
 
@@ -48,17 +48,33 @@ Examples:
 
 In case of a user-induced error (for example, a malformed request):
 
-- Is it an error or an exception? An exception (it must be caught).
-- Should I tell the user all about it? Absolutely, so they can fix it.
-- Should I output the error to logs? You may, marking it as a user-induced exception. This way, you could learn about app usage and improve user experience.
+⚙️ _Is it an error or an exception?_
+
+An exception (it must be caught).
+
+🧑‍💻 _Should I tell the user all about it?_
+
+Absolutely, so they can fix it.
+
+📝 _Should I output the error to logs?_
+
+You may, marking it as a user-induced exception. This way, you could learn about app usage and improve user experience.
 
 ### Third-party-induced error
 
 In case of a third-party-induced error (for example, an external remote API used by your app):
 
-- Is it an error or an exception? An exception (it must be caught).
-- Should I tell the user all about it? Yes, so that they know it’s not a bug on your side: you can’t do much, they just have to wait.
-- Should I output the error to logs? Yes, marking it as a third-party-induced exception. This way, you could learn about deficiencies among your external providers.
+⚙️ _Is it an error or an exception?_
+
+An exception (it must be caught).
+
+🧑‍💻 _Should I tell the user all about it?_
+
+Yes, so that they know it’s not a bug on your side: you can’t do much, they just have to wait.
+
+📝 _Should I output the error to logs?_
+
+Yes, marking it as a third-party-induced exception. This way, you could learn about deficiencies among your external providers.
 
 ### Internal error
 
@@ -66,8 +82,13 @@ In case of a third-party-induced error (for example, an external remote API used
 
 In case of an error occuring outside a user request (for example a script failing at server startup):
 
-- Is it an error or an exception? An error (it must _not_ be caught).
-- Should I output the error to logs? Absolutely, it’s a failure that needs to be fixed.
+⚙️ _Is it an error or an exception?_
+
+An error (it must _not_ be caught).
+
+📝 _Should I output the error to logs?_
+
+Absolutely, it’s a failure that needs to be fixed.
 
 You have nothing to do in this case. By default, it will crash the server and output the error.
 
@@ -75,13 +96,21 @@ You have nothing to do in this case. By default, it will crash the server and ou
 
 In case of an error occuring inside a user request:
 
-- Is it an error or an exception? An error (it must _not_ be caught).
-- Should I tell the user all about it? No, just show them a simple message (such as "Internal server error") so that they know something has to be fixed on your side.
-- Should I output the error to logs? Absolutely, it’s a failure that needs to be fixed.
+⚙️ _Is it an error or an exception?_
 
-You have nothing to do in this case. Any error uncaught by the developer will, in the end, be caught by the server and result in a default client-side error message while it outputs the full error in logs.
+An error (it must _not_ be caught).
 
-_Note: in Node.js Express 4, you have to catch async errors yourself to avoid a server crash._
+🧑‍💻 _Should I tell the user all about it?_
+
+No, just show them a simple message (such as "Internal server error") so that they know something has to be fixed on your side.
+
+📝 _Should I output the error to logs?_
+
+Absolutely, it’s a failure that needs to be fixed.
+
+You generally have nothing to do in this case. Any error uncaught by the developer will, in the end, be caught by the server and result in a default client-side error message while it outputs the full error in logs.
+
+_Note: in Node.js Express 4 however, you have to catch async errors yourself to avoid a server crash._
 
 ## In practice in JavaScript
 
@@ -89,7 +118,7 @@ Some programming languages provide a distinction between plain errors and except
 
 In JavaScript, you can only `throw new Error(…)`. It is up to you to distinguish exceptions and actual errors.
 
-Below is a example with a Node.js Express server (version `5.0.0-beta.3`) handling all four different cases seen before:
+Below is a example with a Node.js Express server (version `5.0.0-beta.3`) handling all four different cases seen above:
 
 1. User-induced exception
 2. Third-party induced exception
