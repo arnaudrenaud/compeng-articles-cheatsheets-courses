@@ -42,9 +42,9 @@ Examples:
 - a user submits malformed data
 - an external provider does not respond
 
-## What to do in various cases
+## What to do in four cases
 
-### User-induced error
+### 1. User-induced error
 
 In case of a user-induced error (for example, a malformed request):
 
@@ -60,7 +60,7 @@ Absolutely, so they can fix it.
 
 You may, marking it as a user-induced exception. This way, you could learn about app usage and improve user experience.
 
-### Third-party-induced error
+### 2. Third-party-induced error
 
 In case of a third-party-induced error (for example, an external remote API used by your app):
 
@@ -78,7 +78,7 @@ Yes, marking it as a third-party-induced exception. This way, you could learn ab
 
 ### Internal error
 
-#### Outside a user request
+#### 3. Outside a user request
 
 In case of an error occuring outside a user request (for example a script failing at server startup):
 
@@ -92,7 +92,7 @@ Absolutely, it’s a failure that needs to be fixed.
 
 You have nothing to do in this case. By default, it will crash the server and output the error.
 
-#### Within a user request
+#### 4. Within a user request
 
 In case of an error occuring inside a user request:
 
@@ -208,7 +208,7 @@ runServer();
 
 ## Summary
 
-Using these rules, both you and the user are properly informed at the correct level:
+Using these rules, both you and the user will be properly informed at the correct level:
 
 - The user knows whether:
   - their request is incorrect
