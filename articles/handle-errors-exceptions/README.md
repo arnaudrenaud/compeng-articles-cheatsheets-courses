@@ -2,6 +2,13 @@
 
 Errors are painful for the developer and the user alike. Errors without a clear message even more. And what about silent errors that make debugging a pain?
 
+## TL;DR
+
+- Do not blindly use `try-catch` blocks
+- Uncaught errors end up in logs, making debugging easier
+- If an error is not your fault, catch it (it is called an exception)
+- If an error is the user's fault, tell them clearly
+
 ## Goals
 
 The objective of this practical guide is to help you, the developer:
