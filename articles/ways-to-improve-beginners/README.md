@@ -1,9 +1,10 @@
-# 9 ways to improve for a beginner in software development
+# 10 ways to improve for a beginner in software development
 
 I taught the practice of web development to around 200 students in six years. Here are ways to improve on the mistakes and misconceptions I noticed most often.
 
 ## TL;DR
 
+- Use automatic code formatting
 - Look for error messages
 - Simplify your code until the bug goes away
 - Solve only one problem at a time
@@ -14,15 +15,23 @@ I taught the practice of web development to around 200 students in six years. He
 - Test the risky parts first
 - Avoid persisting redundant data
 
+## Use automatic code formatting
+
+Even if you work alone, automatic formatting is a free time saver: you can write code faster, and will be able to read it more easily later.
+
+If you write JavaScript or TypeScript, install the Prettier extension for Visual Studio Code and enable "Format on save".
+That's all, you don't need a configuration file, but you can add one at the root of your project if you need to override the default rules.
+
 ## Look for error messages
 
 When the app _doesn't work_, look for an error message. This is especially true when your app is made of multiple services.
 
-Let's say your single-page web app relies on your API server. When something fails, here are three places you have to look for an error:
+Let's say your Next.js web app with server-side rendering relies on your back-end server. When something fails, here are four places you have to look for an error:
 
-- the browser console (uncaught error client-side)
-- the server console (uncaught error server-side)
-- the server response body in the inspector's Network tab (incorrect request error, it should appear in the UI)
+- the browser console (error on the client)
+- the server response body in the inspector's Network tab (invalid request error, it should appear in the UI)
+- the Next.js server console (error during SSR)
+- the back-end server console (error on the back end)
 
 ## Simplify your code until the bug goes away
 
@@ -37,13 +46,13 @@ Try updating dependencies or changing environment variables. If you are still un
 
 ## Solve only one problem at a time
 
-If you try to simultaneously fix a bug, implement a new feature and refactor code, chances are you will waste time by breaking your code and mix unrelated changes in a single commit, which will make code review harder.
+If you try to simultaneously fix a bug, implement a new feature and refactor code, chances are you will waste time by breaking your code or mix unrelated changes in a single commit, which will make code review harder.
 
-If you feel the need for a refactor or a bug fix in the middle of an unrelated feature, refrain from doing it. Save it for later, preferably by opening a dedicated ticket (you can automate it with GitHub actions that will create an issue from any "TODO" mention in your code, for example [TODO to Issue](https://github.com/marketplace/actions/todo-to-issue)).
+If you feel the need for a refactor or a bug fix in the middle of an unrelated feature, refrain from doing it. Save it for later, preferably by opening a dedicated ticket (you can automate it with a GitHub action that will create an issue from any "TODO" mention in your code, for example [TODO to Issue](https://github.com/marketplace/actions/todo-to-issue)).
 
 ## Split tasks and commits
 
-When you receive a ticket for a new feature, work on it before you start implementing it. Add a checklist of subtasks and cases to handle, and implement them one after the other. This will help you keep going when the task at hand is overwhelming. You can also use this detailed case-by-case specification to write automated tests.
+When you receive a ticket for a new feature, work on it before you start implementing it. Add a checklist of subtasks and cases to handle, and implement them one after the other. You can also use this detailed case-by-case specification to write automated tests. This will help you keep going when the task at hand is overwhelming.
 
 The same discipline goes for commits for large features: help the code reviewer by splitting your work into commits with a clear title.
 
@@ -67,7 +76,7 @@ You can have rules that look the same but are conceptually different. If you ref
 
 Rather than DRY, make your code ETC: _Easier To Change_.
 
-This means using a _single source of truth_ for things that are conceptually the same: if you duplicate constants or business rules, they will become hard to change.
+This means using a _single source of truth_ for things that are conceptually the same, for example: duplicate constants, business rules or UI components. If you copy-paste them, they will become hard to change.
 
 ## Optimize reasonably
 
@@ -75,7 +84,7 @@ Just like excessive DRYness, premature optimization is a waste of time.
 
 You might want to improve the performance of an algorithm, for instance by replacing a loop with a regular expression.
 
-Is the performance gain valuable to the user in real-world conditions, with realistic data? Is the gain offset by a potential loss in code readability?
+Is the performance gain valuable to the user in real-world conditions, with actual data? Is the gain offset by a potential loss in code readability?
 
 A lot of time, micro-optimizations are not worth it.
 
@@ -86,7 +95,7 @@ A rule of thumb to avoid poor performance before it hits you in production:
 
 ## Test the risky parts first
 
-> What part of my code should I test first?
+> What part of my code should I test?
 
 Again, make good use of your time. Test what is most critical and/or most at risk of failure.
 
@@ -96,19 +105,19 @@ Also, when a bug is reported, you can start by writing a test that highlights th
 
 > Should I test all cases?
 
-Test all cases that are expected to happen in real-world usage, starting with the most important ones, business-wise.
+Test cases that are expected to happen in real-world usage, starting with the most important ones, business-wise.
 
 ## Avoid persisting redundant data
 
 Again, aim for a single source of truth.
 
-Whether you're developing a stateful user interface or a service connected to a database, you're persisting data state to work on it.
+Whether you're developing a stateful user interface or a service connected to a database, you're going to persist a state (in memory or on the disk).
 
 In React components, I have seen many times a filtered array set to state whereas it could be calculated at render time. Instead of setting in state only the filter arguments, both the arguments and the resulting array are stored, making code more verbose and error-prone because both state values must be updated everytime the filter arguments change.
 
 Similarly, I have seen redundant database design, where data is set in a column whereas it could be calculated in real time.
 
-However, while this single-source-of-truth approach is conceptually cleaner and easier to maintain, it can lead to performance issues if the calculation is heavy and repeated multiple times with the same arguments: why recalculate it if the result is the same?
+However, while this single-source-of-truth approach is conceptually cleaner and easier to maintain, it can lead to performance issues if the calculation is heavy and repeated multiple times with the same arguments: why recalculate it if the result remains the same?
 
 In this case, you can cache the result of the calculation using memoization: for instance `useMemo` in React, which will automatically refresh calculation when arguments change.
 
@@ -116,7 +125,7 @@ In a database, for instance Postgres, you can use materialized views, but you wi
 
 ## Final thoughts
 
-- actively look for error messages ; don't be afraid of them
-- keep your work going by splitting tasks into smaller units that are easier to complete
-- think of the person that will read your code: favor readability over excessive factorization or optimization
-- beware of premature optimization: use your time to fix perceivable problems
+- Actively look for error messages ; don't be afraid of them
+- Keep your work going by splitting tasks into smaller units that are easier to complete
+- Think of the person that will read your code: favor readability over excessive factorization or optimization
+- Beware of premature optimization: use your time to fix perceivable problems
