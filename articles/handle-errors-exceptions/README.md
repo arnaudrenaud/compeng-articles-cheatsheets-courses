@@ -1,4 +1,4 @@
-# What to do with runtime errors
+# What to Do with Runtime Errors
 
 Errors are painful for the developer and the user alike. Errors without a clear message even more. And what about silent errors that make debugging a pain?
 

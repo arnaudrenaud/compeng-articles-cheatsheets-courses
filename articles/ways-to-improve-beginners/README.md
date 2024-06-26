@@ -1,4 +1,4 @@
-# 10 ways to improve for a beginner in software development
+# 10 Ways to Improve for a Beginner in Software Development
 
 I taught the practice of web development to around 200 students in six years. Here are ways to improve on the mistakes and misconceptions I noticed most often.
 
