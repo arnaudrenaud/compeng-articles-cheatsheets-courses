@@ -1,8 +1,4 @@
-# Computer engineering articles, cheatsheets and courses
-
-## Articles
-
-- [What to Do with Runtime Errors](/articles/handle-errors-exceptions/README.md) (published on [DEV.to](https://dev.to/arnaudrenaud/what-to-do-with-runtime-errors-f0o))
+# Computer engineering cheatsheets and courses
 
 ## Cheatsheets
 
