@@ -123,7 +123,7 @@ In this case, you can cache the result of the calculation using memoization: for
 
 In a database, for instance Postgres, you can use materialized views, but you will have to refresh their content manually.
 
-## Final thoughts
+## Summary
 
 - Actively look for error messages ; don't be afraid of them
 - Keep your work going by splitting tasks into smaller units that are easier to complete
